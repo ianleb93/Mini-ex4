@@ -1,4 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿// Auteurs : Alexandre Goddard et Ian Leblanc
+
 using System;
 using System.Collections.Generic;
 

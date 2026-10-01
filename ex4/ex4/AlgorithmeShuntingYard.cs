@@ -1,5 +1,6 @@
 namespace ex4;
 
+
 public class AlgorithmeShuntingYard
 {
     public static Stack<char> operandStack = new Stack<char>();
