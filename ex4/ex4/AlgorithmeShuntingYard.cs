@@ -6,38 +6,27 @@ public class AlgorithmeShuntingYard
     
     public static Queue<char> ConvertirEnPostfix(string expressionInfix)
     {
-         Queue<char> local = new Queue<char>();
-            
-        expressionInfix = expressionInfix.Trim();
-        
+        Queue<char> local = new Queue<char>();
+
         foreach (char c in expressionInfix)
         {
             if (c is '+' or '-' or '*' or '/')
             {
-                if (operandStack.Count > 0)
+                while (operandStack.Count > 0 && !(c is '*' or '/' && operandStack.Peek() is '+' or '-'))
                 {
-                    if ((operandStack.Peek() == '*' || operandStack.Peek() == '/') && c is '-' or '+')
-                    {
-                        local.Enqueue(operandStack.Peek());
-                        operandStack.Pop();
-                    }
-                    else
-                    {
-                        local.Enqueue(c); 
-                        
-                    }
-               
-                    
+                    local.Enqueue(operandStack.Pop());
                 }
                 operandStack.Push(c);
             }
-            else
+            else if (char.IsDigit(c))
             {
-                if (char.IsDigit(c))
-                {
-                    local.Enqueue(c);       
-                }
+                local.Enqueue(c);
             }
+        }
+
+        while (operandStack.Count > 0)
+        {
+            local.Enqueue(operandStack.Pop());
         }
         return local;
     }
